@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 const app = express();
 const prefix = '/api/v1';
-const port = process.env.PORT || 3000;
+const port = process.env.APP_PORT || 3000;
 
 dotenv.config();
 
