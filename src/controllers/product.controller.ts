@@ -14,8 +14,8 @@ export const createProducts = async (req: Request, res: any) => {
         await newProduct.save();
         res.status(201).json({ success: true, data: newProduct });
     }
-    catch (error) {
-        res.status(500).json({ success: false, message: 'Server error' });
+    catch (error:any) {
+        res.status(500).json({ success: false, message: error.message });
     }
 
 };
@@ -25,8 +25,8 @@ export const getProducts = async (req: Request, res: any) => {
         const products = await Product.find();
         res.status(200).json({ success: true, data: products });
     }
-    catch (error) {
-        res.status(500).json({ success: false, message: 'Server error' });
+    catch (error:any) {
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
@@ -40,8 +40,8 @@ export const getProductById = async (req: Request, res: any) => {
         }
         res.status(200).json({ success: true, data: product });
     }
-    catch (error) {
-        res.status(500).json({ success: false, message: 'Server error' });
+    catch (error:any) {
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
@@ -57,8 +57,8 @@ export const deleteProduct = async (req: Request, res: any) => {
 
         res.status(200).json({ success: true, data: product });
     }
-    catch (error) {
-        res.status(500).json({ success: false, message: 'Server error' });
+    catch (error:any) {
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
@@ -73,7 +73,7 @@ export const updateProduct =  async (req: Request, res: any) => {
         }
         res.status(200).json({ success: true, data: updatedProduct });
     }
-    catch (error) {
-        res.status(500).json({ success: false, message: 'Server error' });
+    catch (error:any) {
+        res.status(500).json({ success: false, message: error.message });
     }
 };
