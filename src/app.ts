@@ -1,7 +1,6 @@
 import express from 'express';
 import { connectDB } from './config/db.config'; 
 import productRoutes from './routes/product.route';
-import productRoutesV2 from './routes/product-v2.route';
 import dotenv from 'dotenv';
 
 const app = express();
@@ -12,8 +11,7 @@ dotenv.config();
 
 app.use(express.json());
 
-// app.use(`${prefix}/products`, productRoutes);
-app.use(`${prefix}/productsV2`, productRoutesV2);
+app.use(`${prefix}/products`, productRoutes);
 
 app.listen(port, () => {
   connectDB();

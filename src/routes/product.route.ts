@@ -1,12 +1,18 @@
 import express from 'express';
 import { createProducts, deleteProduct, getPaginatedProducts, getProductById, getProducts, updateProduct } from '../controllers/product.controller';
+import asyncHandler from '../helpers/async.handler'; 
 
 const router = express.Router();
 
-router.get(`/`, getPaginatedProducts);
-router.post(`/`, createProducts);
-router.delete(`/:id`, deleteProduct);
-router.get(`/:id`, getProductById);
-router.put(`/:id`, updateProduct);
+// Rutas para productos
+router
+.route('/')
+.get(asyncHandler(getPaginatedProducts))
+.post(asyncHandler(createProducts));    
+
+router.route('/:id')
+.delete(asyncHandler(deleteProduct))
+.get(asyncHandler(getProductById))  
+.put(asyncHandler(updateProduct));    
 
 export default router;
