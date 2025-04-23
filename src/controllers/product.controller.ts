@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { crudController } from "./crud.controller";
-import Product from "../models/product-v2.model";  // Modelo de producto
+import Product from "../models/product.model";  // Modelo de producto
 
 export const createProducts = async (req: Request, res: Response): Promise<Response> => {
     const product = req.body;
