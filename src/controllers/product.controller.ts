@@ -77,3 +77,29 @@ export const updateProduct =  async (req: Request, res: any) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
+
+export const getPaginatedProducts = async (req: Request, res: any) => {
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const skip = (page - 1) * limit;
+
+    try {
+        const products = await Product.find().skip(skip).limit(limit);
+        const totalProducts = await Product.countDocuments();
+        const totalPages = Math.ceil(totalProducts / limit);
+
+        res.status(200).json({
+            success: true,
+            data: products,
+            pagination: {
+                totalProducts,
+                totalPages,
+                currentPage: page,
+                limit,
+            },
+        });
+    }
+    catch (error:any) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
