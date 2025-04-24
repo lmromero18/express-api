@@ -1,34 +1,20 @@
 import { Request, Response } from "express";
-import { crudController } from "./crud.controller";
-import Product from "../models/product.model";  // Modelo de producto
+import Product, { IProduct } from "../models/product.model";
+import { CrudController } from "./crud.controller";
 
-export const createProducts = async (req: Request, res: Response): Promise<Response> => {
-    const product = req.body;
+export class ProductController extends CrudController<IProduct> {
+  constructor() {
+    super(Product);
+  }
 
-    // Validación de los campos necesarios
-    if (!product.name || !product.price || !product.image) {
-        return res.status(400).json({ success: false, message: 'All fields are required' });
-    }
+//   public override async create(req: Request, res: Response): Promise<Response> {
+//     const { name, price, image } = req.body;
+//     if (!name || !price || !image) {
+//       return res.status(400).json({ success: false, message: "All fields are required" });
+//     }
+//     return super.create(req, res);
+//   }
 
-    return crudController.create(Product, req, res);
-};
+}
 
-export const getProducts = async (req: Request, res: Response): Promise<Response> => {
-    return crudController.getAll(Product, req, res);
-};
-
-export const getProductById = async (req: Request, res: Response): Promise<Response> => {
-    return crudController.getById(Product, req, res);
-};
-
-export const deleteProduct = async (req: Request, res: Response): Promise<Response> => {
-    return crudController.delete(Product, req, res);
-};
-
-export const updateProduct = async (req: Request, res: Response): Promise<Response> => {
-    return crudController.update(Product, req, res);
-};
-
-export const getPaginatedProducts = async (req: Request, res: Response): Promise<Response> => {
-    return crudController.getPaginated(Product, req, res);
-};
+export const productController = new ProductController();
